@@ -295,7 +295,7 @@ with tab1:
             xaxis=dict(tickfont=dict(size=10)),
             yaxis=dict(showticklabels=False, showgrid=False), 
             showlegend=False,
-            height=500
+            height=400
         )
         fig.update_traces(
             textposition='auto',
