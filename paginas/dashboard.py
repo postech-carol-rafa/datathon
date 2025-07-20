@@ -5,8 +5,8 @@ import plotly.express as px
 import numpy as np
 
 # Carregando DF
-df_prospects_filtrado = pd.read_csv('data/df_prospects_filtrado.csv')
-df_vagas_filtrado = pd.read_csv('data/df_vagas_filtrado.csv')
+df_prospects_filtrado = pd.read_csv('data\df_prospects_filtrado.csv')
+df_vagas_filtrado = pd.read_csv('data\df_vagas_filtrado.csv')
 
 # Dicionários
 meses_nome = {
@@ -292,10 +292,10 @@ with tab1:
         fig.update_layout(
             xaxis_title=None,  
             yaxis_title=None, 
-            xaxis=dict(tickfont=dict(size=10)),
+            xaxis=dict(tickfont=dict(size=12)),
             yaxis=dict(showticklabels=False, showgrid=False), 
             showlegend=False,
-            height=400
+            height=500
         )
         fig.update_traces(
             textposition='auto',
@@ -464,7 +464,11 @@ with tab2:
             fig.update_layout(
                     xaxis_title=None,  
                     yaxis_title=None, 
-                    xaxis=dict(showticklabels=False),
+                    xaxis=dict(
+                        showticklabels=True,
+                        tickangle=45,
+                        tickfont=dict(size=11)
+                    ),
                     yaxis=dict(showticklabels=False, showgrid=False), 
                     showlegend=False,
                     height=300                    
