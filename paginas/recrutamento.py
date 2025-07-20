@@ -1,6 +1,7 @@
 # Importando bibiotecas
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 from scipy.sparse import hstack, csr_matrix
 import joblib
 import re
@@ -21,6 +22,13 @@ stop_arquivo_incluidos = pd.read_csv('data/stop_words_incluidos.csv')
 stop_incluidos = stop_arquivo_incluidos['stop_word'].tolist()
 stop_incluidos
 stop_words_portugues_spacy = stop_words_portugues_spacy + stop_incluidos
+
+token_arquivo_hard = pd.read_csv('data/hard.csv')
+token_hard = token_arquivo_hard['hard'].tolist()
+
+token_arquivo_soft = pd.read_csv('data/soft.csv')
+token_soft = token_arquivo_soft['soft'].tolist()
+
 
 # Funções
 def str_lower(text):
@@ -257,6 +265,7 @@ if opcao_cliente != "Selecione o Cliente":
     
     
     st.write('')
+    st.write('---')
     st.write("##### **2. Avaliar o Candidato**")
     
     # 8. Lista com os candidados da vaga e filtro para selecionar candidato
@@ -308,20 +317,158 @@ if opcao_cliente != "Selecione o Cliente":
         
         badges_final = " ".join([f":green-badge[{':material/check:'} {item}]" for item in intersecao_final])
         
+        
+        
+        st.write('---')
         st.write('**Comparativo de Tokens do Currículo com Principais Atividades, Competência Técnicas e Comportamentais da Vaga:**')
         st.markdown(badges_final)
+        
+        interseccao_hard = list(set(intersecao_final) & set(token_hard))
+        interseccao_soft = list(set(intersecao_final) & set(token_soft))
+        
+        qtde_hard = len(interseccao_hard)
+        qtde_soft =len(interseccao_soft)
+        
+        data_skill_vaga = {
+                    'skill': ['Hard Skill', 'Soft Skill'],
+                    'quantidade': [qtde_hard, qtde_soft]
+                }
+
+        df_skill_vaga = pd.DataFrame(data_skill_vaga)
+        df_skill_vaga['categoria'] = 'Skills'
+        # Gráfico de Skill
+        fig = px.bar(
+            df_skill_vaga,
+            x='quantidade',
+            y='categoria',          
+            color='skill',          
+            orientation='h',
+            text='quantidade',
+            color_discrete_map={
+                    'Hard Skill': '#3390E0',  
+                    'Soft Skill': '#FF5E5E'   
+            },
+            title= None
+        )
+
+        fig.update_traces(
+            textposition='inside',
+            textfont=dict(size=16, color='white'),
+            insidetextanchor='middle',
+            marker_line_width=0,
+            selector=dict(type='bar'),
+            hoverinfo='skip',
+            hovertemplate=''
+        )
+        fig.update_layout(
+            barmode='stack',
+            bargap=0,
+            height=150,  
+            margin=dict(l=60, r=60, t=60, b=40),
+            showlegend=False,
+            yaxis=dict(showticklabels=False, title=''),
+            xaxis=dict(
+                showticklabels=False,  
+                showgrid=False,
+                zeroline=False,
+                title=''
+            )
+        )
+
+        if qtde_hard and qtde_hard > 0:
+            fig.add_annotation(
+                x=qtde_hard / 2,
+                y=0,
+                text="Hard Skill",
+                showarrow=False,
+                font=dict(size=16, color='#FFFFFF'),
+                xanchor='center',
+                yanchor='bottom'
+            )
+
+        if qtde_soft and qtde_soft > 0:
+            fig.add_annotation(
+                x=qtde_hard + qtde_soft / 2,
+                y=0,
+                text="Soft Skill",
+                showarrow=False,
+                font=dict(size=16, color='#FFFFFF'),
+                xanchor='center',
+                yanchor='bottom'
+            )
+
+        st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+
+        
+        col10, col20 = st.columns(2)
+        
+        with col10:
+            st.markdown("<span style='color:#0068C9;'>Hard Skill</span>", unsafe_allow_html=True)
+            badges_hard = " ".join([f":blue-badge[{':material/check:'} {item}]" for item in interseccao_hard])
+            st.markdown(badges_hard)
+        with col20:
+            st.markdown("<span style='color:#FF2B2B;'>Soft Skill</span>", unsafe_allow_html=True)
+            badges_soft = " ".join([f":red-badge[{':material/check:'} {item}]" for item in interseccao_soft])
+            st.markdown(badges_soft)  
         
         
         
         # Exibe dados da vaga e do candidato (currículo)
-        
+        st.write('---')
         st.write('### **Vaga**')
         st.write('**Principais Atividades da Vaga:**')
         st.markdown(df_vaga_focada['perfil_vaga_principais_atividades'].iloc[0])
         
         st.write('**Principais Competência Técnicas e Comportamentais:**')
         st.markdown(df_vaga_focada['perfil_vaga_competencia_tecnicas_e_comportamentais'].iloc[0])
-        
+        st.write('---')
         st.write('### **Candidato**')
         st.write('**Currículo**')
         st.markdown(df_curriculos_applicants['cv_pt'].iloc[0])
+        st.write('---')
+        st.write('#### **Entrar em contato com o Candidato**')
+        
+        col30, col40 = st.columns([3,10])
+                
+        match = re.search(r"telefone[:\-\s]*([\d\s\(\)\-]{7,20})", df_curriculos_applicants['cv_pt'].iloc[0], re.IGNORECASE)
+        
+        if match:
+            valor_telefone_loc = match.group(1)
+            telefone_localizado = re.sub(r"\D", "", valor_telefone_loc)
+            telefone_localizado = '55' + telefone_localizado
+        else:
+            telefone_localizado = ''
+            
+
+        with col30:
+            telefone = st.text_input("Celular com WhatsApp (aperte Enter para confirmar)", max_chars=15, value = telefone_localizado)
+
+        
+        url_whatsapp = f"https://wa.me/{telefone}"
+
+        button_html = f'''
+        <a href="{url_whatsapp}" target="_blank">
+            <button style="
+                background-color: #25D366;
+                color: white;
+                border: none;
+                padding: 10px 25px;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;">
+                Abrir WhatsApp
+            </button>
+        </a>
+        '''
+
+        st.markdown(button_html, unsafe_allow_html=True)
+        
+        
+        
+        
+        
+
+        
+    
+        
+    
