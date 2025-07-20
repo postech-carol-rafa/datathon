@@ -20,7 +20,6 @@ stop_words_ingles_spacy = stop_pt['stop_word'].tolist()
 
 stop_arquivo_incluidos = pd.read_csv('data/stop_words_incluidos.csv')
 stop_incluidos = stop_arquivo_incluidos['stop_word'].tolist()
-stop_incluidos
 stop_words_portugues_spacy = stop_words_portugues_spacy + stop_incluidos
 
 token_arquivo_hard = pd.read_csv('data/hard.csv')
