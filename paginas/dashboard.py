@@ -5,8 +5,8 @@ import plotly.express as px
 import numpy as np
 
 # Carregando DF
-df_prospects_filtrado = pd.read_csv('data\df_prospects_filtrado.csv')
-df_vagas_filtrado = pd.read_csv('data\df_vagas_filtrado.csv')
+df_prospects_filtrado = pd.read_csv('data/df_prospects_filtrado.csv')
+df_vagas_filtrado = pd.read_csv('data/df_vagas_filtrado.csv')
 
 # Dicionários
 meses_nome = {
