@@ -81,45 +81,6 @@ Permite analisar a distribuição geográfica das oportunidades, apoiando decis�
 * **Gráfico de evolução das requisições de vaga – Top 5 Clientes:**
 Identifica os principais demandantes de vagas ao longo do tempo, revelando ciclos, crescimento de contas e foco comercial
 
-
-**Dashboard:**
-
-Visão estratégica do desempenho do processo de recrutamento da empresa Decision, permitindo o acompanhamento de vagas, volume de contratações realizadas, tempo médio de preenchimento e quantidade de vagas. A ferramenta também possibilita a análise dos indicadores, fornecendo subsídios analíticos para decisões gerenciais, otimização de esforços e aprimoramento contínuo da eficiência na alocação de talentos. 
-
-* **Filtros campos: Unidade Decision, Cliente e Período (Ano e Trimestre).** 
-Permitem segmentar os dados conforme a necessidade de análise e geram uma visualização personalizada e dinâmica para diferentes públicos ou contextos.
-	
-            Unidade Decision: Análise por operação/local.     
-            Cliente: Foco em empresas contratantes específicas.
-            Período: Limitar análise conforme data de referência.
-
-* **Quantidade total de vagas**
-Fornece uma visão clara do volume e estágio dos processos seletivos em curso, permitindo acompanhar o fluxo operacional e identificar possíveis gargalos ou etapas que exigem atenção da gestão.
-
-* **Quantidade de contratações realizadas**
-É um termômetro direto da produtividade do time de recrutamento. Ajuda a mensurar o impacto real das vagas conduzidas e serve como base para análise de conversão e desempenho.
-* **Quantidade por status da vaga**
-O indicador mostra quantas vagas estão em cada etapa do recrutamento (Encaminhado ao requisitante, não aprovado pelo cliente, desistiu, sem interesse na vaga, contratado pelo hunting e contratado pela decision). Essa análise ajuda a identificar gargalos e melhorar a gestão dos processos de seleção e planejamento de talentos.
-
-* **Tempo médio de contratação, encaminhamento ao requisitante, dias para avaliação do RH e entrevista cliente**
-Indica a agilidade do processo seletivo e sua eficiência operacional. Um tempo elevado pode refletir lentidão na triagem, baixa aderência dos candidatos ou atrasos internos, influenciando diretamente o custo e a satisfação do cliente
-
-* **Top 5 vagas por perfil de área de atuação**
-Destaca as cinco áreas com maior número de vagas abertas, permitindo entender quais perfis profissionais estão em alta demanda e orientar estratégias de recrutamento conforme a tendência do mercado.
-
-* **Top 10 clientes por prioridade da vaga**
-Apresenta os dez principais clientes que têm vagas com maior prioridade, ajudando a direcionar esforços para atender demandas mais urgentes e estratégicas.
-
-* **Evolução diária das vagas por prioridade**
-Monitora o crescimento ou redução diária das vagas de acordo com seu nível de prioridade (alta, média, baixa e não informado). Esse acompanhamento apoia a gestão ágil e a alocação assertiva de recursos de recrutamento.
-
-* **Quantidade de vagas por área de atuação**
-Permite entender a demanda por perfis técnicos ou áreas específicas. Isso apoia decisões de priorização, especialização da equipe e distribuição de esforço conforme o perfil das oportunidades contratantes. Exemplo: Vaga TI- Projetos, TI – SAP, TI – Infraestrutura...
-
-* **Quantidade de vagas por nível do profissional**
-Distribui o número de vagas conforme o nível de senioridade exigido (júnior, pleno, sênior, liderança, etc), fornecendo insights sobre o perfil profissional mais requisitado e auxiliando no alinhamento das ações de atração de talentos.
-
-
 **Dashboard:**
 
 Visão estratégica do desempenho do processo de recrutamento da empresa Decision, permitindo o acompanhamento de vagas, volume de contratações realizadas, tempo médio de preenchimento e quantidade de vagas. A ferramenta também possibilita a análise dos indicadores, fornecendo subsídios analíticos para decisões gerenciais, otimização de esforços e aprimoramento contínuo da eficiência na alocação de talentos. 
@@ -176,11 +137,18 @@ Seleção de candidato dentre os recomendados, para detalhamento do perfil
 * **Tokens – Palavras chaves**
 Palavras que possuem intersecção entre o currículo do candidato com a descrição da vaga
 
+* **Soft e Hard Skill**
+Visualização de gráfico apresentando a quantidade de Soft e Hard Skill a partir das palavras chaves (tokens)
+Apresenta de forma separadas quais são as skill
+
 * **Descrição da vaga**
 Descrição completa da vaga contendo as principais atividades a serem desempenhadas e principais competências técnicas e comportamentais
 
 * **Currículo do candidato**
 Descrição do currículo do candidato com informações detalhadas do seu perfil profissional, habilidades, experiências, informações de estudos, entre outros...
+
+* **Entrar em contato pelo WhatsApp**
+Apresenta a opção para entrar em contato com o candidato pelo WhatsApp, pesquisa o número de telefone diretamente no currículo.
 
 **Dashboard KPI**
 
