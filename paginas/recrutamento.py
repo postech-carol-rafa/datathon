@@ -163,16 +163,20 @@ if opcao_cliente != "Selecione o Cliente":
     df_applicants_vaga['perfil_vaga_competencia_tecnicas_e_comportamentais'] = df_applicants_vaga['perfil_vaga_competencia_tecnicas_e_comportamentais'].astype(str)
 
     
-    # 3. Dropar os IDs antes de passar para o modelo
-    df_applicants_vaga['perfil_vaga_principais_atividades'] = df_applicants_vaga['perfil_vaga_principais_atividades'].apply(lambda x: ' '.join(x))
-    df_applicants_vaga['perfil_vaga_competencia_tecnicas_e_comportamentais'] = df_applicants_vaga['perfil_vaga_competencia_tecnicas_e_comportamentais'].apply(lambda x: ' '.join(x))
-    df_applicants_vaga['perfil_vaga_demais_observacoes'] = df_applicants_vaga['perfil_vaga_demais_observacoes'].apply(lambda x: ' '.join(x))
-    df_applicants_vaga['informacoes_basicas_titulo_vaga_resumido'] = df_applicants_vaga['informacoes_basicas_titulo_vaga_resumido'].apply(lambda x: ' '.join(x))
+    # 3. Juntar os tokens em uma frase único para o TF-IDF
+    colunas_para_join = [
+        'perfil_vaga_principais_atividades',
+        'perfil_vaga_competencia_tecnicas_e_comportamentais',
+        'perfil_vaga_demais_observacoes',
+        'informacoes_basicas_titulo_vaga_resumido',
+        'infos_basicas_objetivo_profissional',
+        'informacoes_profissionais_conhecimentos_tecnicos',
+        'informacoes_profissionais_outras_certificacoes',
+        'cv_pt'
+    ]
 
-    df_applicants_vaga['infos_basicas_objetivo_profissional'] = df_applicants_vaga['infos_basicas_objetivo_profissional'].apply(lambda x: ' '.join(x))
-    df_applicants_vaga['informacoes_profissionais_conhecimentos_tecnicos'] = df_applicants_vaga['informacoes_profissionais_conhecimentos_tecnicos'].apply(lambda x: ' '.join(x))
-    df_applicants_vaga['informacoes_profissionais_outras_certificacoes'] = df_applicants_vaga['informacoes_profissionais_outras_certificacoes'].apply(lambda x: ' '.join(x))
-    df_applicants_vaga['cv_pt'] = df_applicants_vaga['cv_pt'].apply(lambda x: ' '.join(x))
+      for coluna in colunas_para_join:
+        df_applicants_vaga[coluna] = df_applicants_vaga[coluna].apply(lambda x: ' '.join(x) if isinstance(x, list) else x)
     
     # 4. Cria as matrizes esparsas TF-IDF
     X_atividades = tfidf_atividades.transform(df_applicants_vaga['perfil_vaga_principais_atividades'])
