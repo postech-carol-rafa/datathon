@@ -175,7 +175,7 @@ if opcao_cliente != "Selecione o Cliente":
         'cv_pt'
     ]
 
-      for coluna in colunas_para_join:
+    for coluna in colunas_para_join:
         df_applicants_vaga[coluna] = df_applicants_vaga[coluna].apply(lambda x: ' '.join(x) if isinstance(x, list) else x)
     
     # 4. Cria as matrizes esparsas TF-IDF
